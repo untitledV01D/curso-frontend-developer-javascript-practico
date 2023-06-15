@@ -290,6 +290,7 @@ aside {
 /* Aside - Product Detail */
 
 .product-detail-close {
+    display: flex;
     background: var(--white);
     width: 14px;
     height: 14px;

@@ -3,12 +3,14 @@ const desktopMenu = document.querySelector('.desktop-menu');
 const burguerMenuIcon = document.querySelector('.menu');
 const cartMenuIcon = document.querySelector('.navbar-shopping-cart');
 const shoppingCartContainer = document.querySelector('aside');
+const productDetail = document.getElementById('productDetail');
 const mobileMenu = document.querySelector('.mobile-menu');
+const productDetailCloseIcon = document.querySelector('.product-detail-close');
 
 function toggleDesktopMenu(){
-    const isProductDetailOpen = !shoppingCartContainer.classList.contains('inactive');
+    const isShoppingCartOpen = !shoppingCartContainer.classList.contains('inactive');
 
-    if(isProductDetailOpen){
+    if(isShoppingCartOpen){
         shoppingCartContainer.classList.add('inactive');
     }
 
@@ -16,9 +18,11 @@ function toggleDesktopMenu(){
 }
 
 function toggleMobileMenu(){
-    const isProductDetailOpen = !shoppingCartContainer.classList.contains('inactive');
+    const isShoppingCartOpen = !shoppingCartContainer.classList.contains('inactive');
+    productDetail.classList.add('inactive');
 
-    if(isProductDetailOpen){
+
+    if(isShoppingCartOpen){
         shoppingCartContainer.classList.add('inactive');
     }
 
@@ -28,6 +32,8 @@ function toggleMobileMenu(){
 function toggleCartMenu(){
     const isMobileMenuOpen = !mobileMenu.classList.contains('inactive');
     const isDesktopMenuOpen = !desktopMenu.classList.contains('inactive');
+
+    productDetail.classList.add('inactive');
 
     if(isDesktopMenuOpen){
         desktopMenu.classList.add('inactive');
@@ -40,9 +46,26 @@ function toggleCartMenu(){
     shoppingCartContainer.classList.toggle('inactive');
 }
 
+function showProductDetail(){
+    shoppingCartContainer.classList.add('inactive');
+
+    productDetail.classList.remove('inactive');
+}
+
+function closeProductDetail(){
+    const isShoppingCartOpen = !shoppingCartContainer.classList.contains('inactive');
+
+    if(isShoppingCartOpen){
+        shoppingCartContainer.classList.add('inactive');
+    }
+
+    productDetail.classList.add('inactive');
+}
+
 navEmail.addEventListener('click', toggleDesktopMenu);
 burguerMenuIcon.addEventListener('click', toggleMobileMenu);
 cartMenuIcon.addEventListener('click', toggleCartMenu);
+productDetailCloseIcon.addEventListener('click', closeProductDetail)
 
 
 
@@ -78,6 +101,7 @@ function renderProducts(arr){
         // Imagen de producto
         const productCardImg = document.createElement('img');
         productCardImg.setAttribute('src', product.image);
+        productCardImg.addEventListener('click', showProductDetail);
     
         // Div Contendor de información de producto
         const productInfo = document.createElement('div');
